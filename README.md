@@ -45,6 +45,13 @@ make logs
 make down
 ```
 
+> [!TIP]
+> O Docker Compose usa perfis para alternar redes e serviços. Defina `PROFILE` (ex.: `local`, `dev`, `hml`, `prod`) no `.env` ou no comando:
+> ```bash
+> PROFILE=prod make up   # usa backend-proxy na proxy_network
+> PROFILE=local make up  # expõe a porta 3001 e sobe o Mongo local
+> ```
+
 ## ⚙️ Variáveis de Ambiente
 
 Crie um arquivo `.env` baseado no `.env.example`:
