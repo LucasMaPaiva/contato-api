@@ -57,6 +57,3 @@ MONGO_URI=mongodb://mongodb:27017/contato
 ## 🔐 Configuração de Rede
 
 Esta API foi configurada para rodar atrás de um proxy reverso (como Nginx Proxy Manager). Ela utiliza a rede externa `proxy_network` para se comunicar com o proxy sem expor portas diretamente ao IP público, garantindo maior segurança.
-
----
-Desenvolvido por Antigravity 🤖
