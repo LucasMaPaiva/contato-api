@@ -2,14 +2,16 @@ import { GameState } from "../game/types";
 import { Player } from "../shared/types";
 
 export type SocketMessageType = 
-  | "JOIN" 
+  | "CREATE_ROOM"
+  | "JOIN_ROOM"
   | "BECOME_MASTER" 
   | "SET_WORD" 
   | "SEND_CLUE" 
   | "CONTACT" 
   | "BLOCK" 
   | "CHAT_MESSAGE" 
-  | "RESET";
+  | "REQUEST_RESET"
+  | "VOTE_RESET";
 
 export interface SocketMessage {
   type: SocketMessageType;

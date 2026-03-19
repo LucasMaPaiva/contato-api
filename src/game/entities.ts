@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const PlayerSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true },
+  id: { type: String, required: true },
   name: { type: String, required: true },
 });
 
@@ -21,8 +21,14 @@ const ClueSchema = new mongoose.Schema({
   pendingCountdown: Number,
 });
 
+const ResetVoteSchema = new mongoose.Schema({
+  requestedById: { type: String, required: true },
+  requestedByName: { type: String, required: true },
+  votes: [{ type: String, required: true }],
+}, { _id: false });
+
 const GameStateSchema = new mongoose.Schema({
-  key: { type: String, default: 'current_game', unique: true },
+  roomCode: { type: String, required: true, unique: true },
   master: String,
   masterName: String,
   word: { type: String, default: "" },
@@ -30,6 +36,7 @@ const GameStateSchema = new mongoose.Schema({
   gameStatus: { type: String, enum: ['playing', 'won'], default: 'playing' },
   players: [PlayerSchema],
   clues: [ClueSchema],
+  resetVote: { type: ResetVoteSchema, default: null },
 });
 
 export const GameStateModel = mongoose.model('GameState', GameStateSchema);
