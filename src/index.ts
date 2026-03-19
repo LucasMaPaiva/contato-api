@@ -4,7 +4,7 @@ import { WebSocketServer } from "ws";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { handleSocketMessage, handleDisconnect } from "./sockets/handlers";
-import { loadGameState } from "./game/state";
+import { loadRoomStates } from "./game/state";
 
 dotenv.config();
 
@@ -16,8 +16,8 @@ async function startServer() {
     await mongoose.connect(MONGO_URI);
     console.log("Connected to MongoDB");
 
-    await loadGameState();
-    console.log("Game state loaded");
+    await loadRoomStates();
+    console.log("Room states loaded");
 
     const app = express();
     const server = createServer(app);
@@ -33,7 +33,7 @@ async function startServer() {
       });
 
       ws.on("close", () => {
-        handleDisconnect(id, wss);
+        handleDisconnect(ws as any, id, wss);
       });
     });
 

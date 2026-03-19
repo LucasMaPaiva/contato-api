@@ -22,13 +22,16 @@ services:
   backend-proxy:
     <<: *backend-base
     profiles: ["prod"]
+    depends_on:
+      mongodb:
+        condition: service_healthy
     networks:
       - default
       - proxy_network
 
   mongodb:
     image: mongo:4.4.18
-    profiles: ["local", "dev", "hml"]
+    profiles: ["local", "dev", "hml", "prod"]
     ports:
       - "27017:27017"
     restart: unless-stopped
